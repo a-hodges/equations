@@ -2,6 +2,8 @@
 An extensible module for evaluation of arbitrary mathematical expressions
 '''
 
+from __future__ import division
+
 import operator
 import re
 
@@ -106,7 +108,7 @@ def types(stack):
     '''
     Gets the types list from a token list
     '''
-    return next(zip(*stack)) if stack else []
+    return map(operator.itemgetter(0), stack)
 
 
 def tokenize(expression, operations=operations, unary=unary):

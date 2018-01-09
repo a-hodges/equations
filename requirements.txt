@@ -1,1 +1,2 @@
 # install with: pip install -r requirements.txt
+six ~= 1.11
