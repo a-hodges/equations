@@ -18,6 +18,7 @@ operations = [
     },
     {
         '^': operator.pow,
+        '**': operator.pow,
     },
 ]
 
