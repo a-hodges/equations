@@ -57,6 +57,16 @@ class InvalidToken (EquationError):
         super().__init__('Invalid token {} found in {}'.format(token, expression))
 
 
+class InvalidUnaryOperator (EquationError):
+    '''
+    A token was found where a unary operator would be expected, but has no associated operation
+    '''
+    def __init__(self, expression, token):
+        self.expression = expression
+        self.token = token
+        super().__init__('Invalid unary token {} found in {}'.format(token, expression))
+
+
 class NotEnoughOperands (EquationError):
     '''
     Not enough operands for an operator
@@ -165,7 +175,7 @@ def infix2postfix(expression, operations=operations, unary=unary):
             if prev_type == 'PAREN_OPEN' or isinstance(prev_type, int):
                 # unary operation
                 if token not in unary:
-                    raise NotEnoughOperands(equation, token)
+                    raise InvalidUnaryOperator(equation, token)
                 stack.append(('UNARY', token))
             else:
                 while stack and isinstance(stack[-1][0], int) and stack[-1][0] >= type:
