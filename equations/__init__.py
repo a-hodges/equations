@@ -132,7 +132,8 @@ def tokenize(expression, operations=operations, unary=unary):
     operators = {op for ops in operations for op in ops}
     unary_operators = [op for op in unary if op not in operators]
     tokens = [(r'\s+', 'WHITESPACE')]
-    tokens.extend((r'|'.join(map(re.escape, ops)), i) for i, ops in enumerate(operations))
+    for i, ops in enumerate(operations):
+        tokens.append((r'|'.join(map(re.escape, sorted(ops, key=len, reverse=True))), i))
     tokens.append((r'|'.join(map(re.escape, unary_operators)), 'UNARY'))
     tokens.extend([
         (r'-', len(operations)),  # ???
