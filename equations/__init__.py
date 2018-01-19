@@ -170,10 +170,8 @@ def infix2postfix(expression, operations=operations, unary=unary):
             while stack[-1][0] != 'PAREN_OPEN':
                 output.append(stack.pop())
             stack.pop()
-        elif type == 'UNARY':
-            stack.append(item)
-        elif isinstance(type, int):  # operators
-            if prev_type == 'PAREN_OPEN' or isinstance(prev_type, int):
+        elif type == 'UNARY' or isinstance(type, int):  # operators
+            if type == 'UNARY' or prev_type == 'PAREN_OPEN' or isinstance(prev_type, int):
                 # unary operation
                 if token not in unary:
                     raise InvalidUnaryOperator(equation, token)
