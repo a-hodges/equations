@@ -177,7 +177,8 @@ def infix2postfix(expression, operations=operations, unary=unary):
                     raise InvalidUnaryOperator(equation, token)
                 stack.append(('UNARY', token))
             else:
-                while stack and isinstance(stack[-1][0], int) and stack[-1][0] >= type:
+                # while top item is of higher priority keep popping
+                while stack and stack[-1][0] != 'PAREN_OPEN' and (stack[-1][0] == 'UNARY' or stack[-1][0] >= type):
                     output.append(stack.pop())
                 stack.append(item)
         else:
