@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(name='equations',
       version='1.0.0',
@@ -10,5 +10,4 @@ setup(name='equations',
       license='MIT',
       keywords='equations expressions math parsing solving',
       install_requires=['six'],
-      python_requires='>=2.6, ~=3.3',
-      packages=['equations'])
+      packages=find_packages())
